@@ -1,7 +1,10 @@
 require 'pry'
 
 class BikeShareApp < Sinatra::Base
-    set :method_override, true
+  
+  set :root, File.expand_path("..", __dir__)
+    
+  set :method_override, true
 
   get '/' do
     erb :"home/index"
@@ -55,5 +58,4 @@ class BikeShareApp < Sinatra::Base
     @station = Station.destroy(params[:id])
     redirect '/stations'
   end
-
 end

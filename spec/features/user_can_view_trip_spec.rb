@@ -2,7 +2,7 @@
 require 'pry'
 
 RSpec.describe "A user can view trip" do
-  before(:each) {Trip.create(duration: 63, start_date: "2013/8/28", start_station_name: "South Van Ness at Market", start_station_id: 66, end_date: "2013/08/29", end_station_name: "South Van Ness at Market", end_station_id: 66, bike_id: 520, subscription_type: "Subscriber", zip_code: 94127)}
+  before(:each) {Trip.create(duration: 63, start_date: "2013/8/28", start_station_name: "South Van Ness at Market", end_date: "2013/08/29", end_station_name: "South Van Ness at Market", bike_id: 520, subscription_type_id: "Subscriber", zip_code: 94127)}
   
   it "and has all content" do
     visit '/trips/1'
@@ -16,25 +16,18 @@ RSpec.describe "A user can view trip" do
       expect(page).to have_content("Start Station Name: South Van Ness at Market")
     end
     within("ul li:nth-child(4)") do
-      expect(page).to have_content("Start Station ID: 66")
-    end
-    within("ul li:nth-child(5)") do
       expect(page).to have_content("End Date: 2013-08-29")
     end
-    within("ul li:nth-child(6)") do
+    within("ul li:nth-child(5)") do
       expect(page).to have_content("End Station Name: South Van Ness at Market")
     end
-    within("ul li:nth-child(7)") do
-      expect(page).to have_content("End Station ID: 66")
-    end
-
-     within("ul li:nth-child(8)") do
+     within("ul li:nth-child(6)") do
       expect(page).to have_content("Bike ID: 520")
     end
-     within("ul li:nth-child(9)") do
+     within("ul li:nth-child(7)") do
       expect(page).to have_content("Subscription type: Subscriber")
     end
-     within("ul li:nth-child(10)") do
+     within("ul li:nth-child(8)") do
       expect(page).to have_content("Zip Code: 94127")
     end
   end

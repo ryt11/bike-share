@@ -2,6 +2,7 @@ require 'csv'
 require './app/models/station.rb'
 require './app/models/trip.rb'
 require './app/models/condition.rb'
+require './app/models/subscription_type.rb'
 require 'pry'
 
 
@@ -31,6 +32,8 @@ open_contents.each do |row|
   next unless row[:end_date] != ''
   next if row[:zip_code].nil? || row[:zip_code].length < 5
 
+subscription = SubscriptionType.find_or_create_by(name: row[:subscription_type])
+
 start_date = row[:start_date]
   row[:start_date] = Date.strptime(start_date, '%m/%d/%Y')
 end_date = row[:end_date]
@@ -38,12 +41,10 @@ end_date = row[:end_date]
   Trip.create!(duration: row[:duration],
               start_date: row[:start_date],
               start_station_name: row[:start_station_name],
-              start_station_id: row[:start_station_id],
               end_date: row[:end_date],
-              end_station_name: row[:end_station_name],
-              end_station_id: row[:end_station_id],
+              end_station_name: row[:end_station_name],        
               bike_id: row[:bike_id],
-              subscription_type: row[:subscription_type],
+              subscription_type_id: subscription.id,
               zip_code: row[:zip_code]
               )
       puts "creating trip from row #{@count} with zipcode #{row[:zip_code]} "

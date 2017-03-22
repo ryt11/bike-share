@@ -20,9 +20,9 @@
       <td><%= trip.start_date %></td>
       <td><%= trip.start_station_name %></td>
       <td><%= trip.end_date %></td>
-      <td><%= trip.end_station_id %></td>
+      <td><%= trip.end_station_name %></td>
       <td><%= trip.bike_id %></td>
-      <td><%= trip.subscription_type %></td>
+      <td><%= trip.subscription_type_id %></td>
       <td><%= trip.zip_code %></td>
       <td>    <form action="/trips/<%=trip.id%>" method="post">
                   <input type="hidden" name="_method" value="DELETE" />
